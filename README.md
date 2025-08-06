@@ -5,6 +5,8 @@
   <img src="https://img.shields.io/badge/python-3.7%2B-green?logo=python" alt="Python"/>
   <img src="https://img.shields.io/badge/unsupervised-yes-success" alt="Unsupervised"/>
   <img src="https://img.shields.io/badge/real--time-yes-blueviolet" alt="Real-Time"/>
+  <img src="https://img.shields.io/badge/ML-Multivariate-blue" alt="Multivariate"/>
+  <img src="https://img.shields.io/badge/license-MIT-yellowgreen" alt="MIT License"/>
 </div>
 
 > **DRUM** is a blazing-fast, unsupervised, multivariate regime shift (change point) detector built for real-time, streaming data.  
@@ -12,7 +14,7 @@
 
 ---
 
-## 🚀 **Why DRUM?**
+## 🚀 Why DRUM?
 
 - **Online:** Detects changes as data arrives—no need to store all history
 - **Unsupervised:** Works without labels or human intervention
@@ -22,21 +24,19 @@
 
 ---
 
-## 📖 **How Does DRUM Work?**
+## 📖 How Does DRUM Work?
 
 1. **Sliding and Disjoint Windows:**  
    DRUM divides your data stream into *windows*—some overlap (sliding), some don’t (disjoint).
 
 2. **For each pair of windows, DRUM computes:**  
-   - 🟣 **Mean Shift (\(\Delta m\))**
-   - 🟢 **Std Shift (\(\Delta s\))**
-   - 🔵 **Fluctuation Across Running Mean (\(\Delta frm\))**  
+   - 🟣 **Mean Shift** (<code>&Delta; m</code>)
+   - 🟢 **Std Shift** (<code>&Delta; s</code>)
+   - 🔵 **Fluctuation Across Running Mean** (<code>&Delta; frm</code>)  
      (counts how "jagged" or "noisy" the signal is vs. its own mean)
 
-3. **Aggregate into a Change Score (LCS):**
-   $$
-   \text{LCS} = \alpha \sum_{i} \Delta m_{i} + \beta \sum_{i} \Delta s_{i} + \gamma \sum_{i} \Delta frm_{i}
-   $$
+3. **Aggregate into a Change Score (LCS):**  
+   <img src="https://latex.codecogs.com/svg.image?\text{LCS}%20=%20\alpha%20\sum_{i}%20\Delta%20m_{i}%20+%20\beta%20\sum_{i}%20\Delta%20s_{i}%20+%20\gamma%20\sum_{i}%20\Delta%20frm_{i}" alt="LCS formula" height="35"/>  
    <sup>*(α, β, γ are weighting parameters, sum to 1)*</sup>
 
 4. **Detect Change Points:**  
@@ -45,7 +45,7 @@
 
 ---
 
-## ✨ **DRUM Algorithm (Pseudocode)**
+## ✨ DRUM Algorithm (Pseudocode)
 
 ```text
 Input: Data stream S, window size d, weights α, β, γ, threshold
